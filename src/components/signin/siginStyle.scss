@@ -1,8 +1,14 @@
-.signin-wrapper{
-  width: 30vw;
+.signin-wrapper {
+  width: 380px;
   display: flex;
   flex-direction: column;
-  .title{
+
+  .title {
     margin: 20px 0;
+  }
+  
+  .button{
+    display: flex;
+    justify-content: space-between;
   }
 }
