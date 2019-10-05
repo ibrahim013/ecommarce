@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { auth } from './firebase/firebase.util';
+import { auth, createUserProfileDocument } from './firebase/firebase.util';
 import './App.css';
 
 import AuthPage from './pages/authentication/authComponent';
@@ -13,8 +13,19 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   
   useEffect(()=> {
-    auth.onAuthStateChanged((user) => setCurrentUser(user))
-  }, [currentUser]);
+    auth.onAuthStateChanged(async(userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          })
+        })
+      }
+      setCurrentUser(null);
+    })
+  },[]);
 
   return (
     <div>
