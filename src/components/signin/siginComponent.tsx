@@ -3,14 +3,21 @@ import './siginStyle.scss';
 
 import FormInput from '../../components/Form-input/FormInputComponent';
 import CustomBotton from '../custom-button/customButtonComponent';
-import { signInWithGoogle } from '../../firebase/firebase.util';
+import { auth, signInWithGoogle } from '../../firebase/firebase.util';
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setEmail('');
+      setPassword('');
+    } catch(err){
+      console.log('error sigin in user', err.message)
+    }
   }
   return (
     <div className='signin-wrapper'>
