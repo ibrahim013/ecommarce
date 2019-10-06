@@ -5,14 +5,24 @@ import CustomBotton from '../custom-button/customButtonComponent';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.util';
 
 
-
+interface UserCredentials {
+  displayName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const SiginUP = () => {
   
-  const [displayName, setDisplayName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+
+  const {displayName, email, password, confirmPassword} = userCredentials;
 
   const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,14 +31,20 @@ const SiginUP = () => {
     }
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      await createUserProfileDocument(user, {displayName})
-      setDisplayName('')
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+      await createUserProfileDocument(user, {displayName});
+      setUserCredentials({ ...userCredentials,
+      displayName: '',
+      email: '',
+      password: '',
+      confirmPassword: ''} )
     }catch(err){
       console.log(err.message)
     }
+  }
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const {name, value} = event.currentTarget;
+    setUserCredentials({...userCredentials, [name] : value})
   }
   return(
     <div className='sign-up'>
@@ -37,29 +53,33 @@ const SiginUP = () => {
       <form className='sigin-up-form' onSubmit={handleSubmit}>
         <FormInput
           type='text'
+          name='displayName'
           value={displayName}
-          onChange={e => setDisplayName(e.currentTarget.value)}
+          onChange={handleChange}
           label='Display Name'
           required
         />
         <FormInput
           type='email'
+          name='email'
           value={email}
-          onChange={e => setEmail(e.currentTarget.value)}
+          onChange={handleChange}
           label='Email'
           required
         />
         <FormInput
           type='password'
+          name='password'
           value={password}
-          onChange={e => setPassword(e.currentTarget.value)}
+          onChange={handleChange}
           label='Password'
           required
         />
         <FormInput
           type='password'
+          name='confirmPassword'
           value={confirmPassword}
-          onChange={e => setConfirmPassword(e.currentTarget.value)}
+          onChange={handleChange}
           label='Confirm Password'
           required
         />
