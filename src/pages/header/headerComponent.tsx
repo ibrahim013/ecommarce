@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import './headerStyle.scss';
+
 import { auth } from '../../firebase/firebase.util';
 import CartIcon from '../../components/cart-icon/cartIconComponent';
 import CartDropdown from '../../components/cart-dropdown/cartDropdownComponent';
@@ -34,7 +36,7 @@ const Header: React.FC<Props> = ({currentUser, hidden}) => {
 
 const mapStateToProps = (state: any) => ({
   currentUser: state.user.currentUser,
-  hidden: state.toggleCartHidden.hidden
+  hidden: state.cart.hidden
 })
 
 export default connect(mapStateToProps, null)(Header);

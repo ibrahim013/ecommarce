@@ -5,7 +5,7 @@ import cartReducer from './cart/cartReducer';
  
 const rootReducer = combineReducers({
   user: userReducer,
-  toggleCartHidden: cartReducer
+  cart: cartReducer
 })
 
 export default rootReducer;

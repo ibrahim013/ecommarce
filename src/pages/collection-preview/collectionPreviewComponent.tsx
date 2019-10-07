@@ -12,9 +12,9 @@ const CollectionPreview: React.FC<Props> = ({title, items}) => {
     <div className='collection-preview'>
       <h1 className='collection-preview-title'>{title}</h1>
       <div className='preview'>
-        {items.filter((item, idx) => idx < 4).map(({id, name, imageUrl, price,}) => {
-          return <CollectionItems key={`item-preview${id}`} 
-            name={name} imageUrl={imageUrl} price={price}/>
+        {items.filter((item, idx) => idx < 4).map((item) => {
+          return <CollectionItems key={`item-preview${item.id}`} 
+            item={item}/>
         })}
       </div>
     </div>
