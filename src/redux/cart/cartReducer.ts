@@ -1,10 +1,10 @@
 import  CART_TYPES  from './cartType';
-import { addToCart } from './cartUtils';
+import { addToCart, removeCartItem } from './cartUtils';
 
 
 interface INITIAL_STATE {
   hidden: boolean;
-  cartItems: object[];
+  cartItems: any[];
 }
 
 const INITIAL_STATE: INITIAL_STATE = {
@@ -12,7 +12,8 @@ const INITIAL_STATE: INITIAL_STATE = {
   cartItems: []
 
 }
-type Action = {type: 'TOGGLE_CART_HIDDEN', payload?: any} | {type: 'ADD_ITEMS', payload: []}
+type Action = {type: 'TOGGLE_CART_HIDDEN', payload?: any} | {type: 'ADD_ITEMS', payload: []} | 
+{type: 'CLEAR_ITEM_FROM_CART', payload: []} 
 
 const cartReducer = (state= INITIAL_STATE, action: Action)  => {
   switch(action.type){
@@ -25,6 +26,16 @@ const cartReducer = (state= INITIAL_STATE, action: Action)  => {
       return {
         ...state,
         cartItems: addToCart(state.cartItems, action.payload)
+      }
+    case CART_TYPES.REMOVE_CART_ITEM: 
+      return {
+        ...state,
+        cartItems: removeCartItem(state.cartItems, action.payload)
+      }
+    case CART_TYPES.CLEAR_ITEM_FROM_CART: 
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(cartItem => cartItem.id !== action.payload.id)
       }
     default:
       return {

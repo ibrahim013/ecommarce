@@ -26,7 +26,7 @@ const CheckoutPage: React.FC<any> = ({cartItems, total}) => (
       </div>
     </div>
     {
-      cartItems.map((cartItem: any) => <CheckoutItem key={cartItem.id} cartItems={cartItem}/>)
+      cartItems.map((cartItem: any) => <CheckoutItem key={cartItem.id} cartItem={cartItem}/>)
     }
     <div className='total'>{`Total: ₦${total}`}</div>
   </div>
