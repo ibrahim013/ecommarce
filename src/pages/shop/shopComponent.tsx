@@ -1,29 +1,19 @@
-import React, { useState } from 'react';
-import { collections } from '../../Fixtures';
-import CollectionPreview from '../collection-preview/collectionPreviewComponent';
 
-export interface CollectionItem {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
-interface CollectionList {
-  id: number;
-  title: string;
-  routeName: string;
-  items: CollectionItem[]
-}
+import React from 'react';
+import CollectionOverview from '../../components/collection-overview/collectionOverviewComponent';
+
+
 const Collections = () => {
-  const [collectionList] = useState<Array<CollectionList>>([...collections]);
 
   return (
-    <div>
-      {collectionList.map(({id, title, items})=> {
-        return <CollectionPreview key={id} title={title} items={items}/>
-      })}
+    <div className='shop-page'>
+      {/* 
+      // @ts-ignore */}
+      <CollectionOverview/>
     </div>
   )
 }
+  
+
 
 export default Collections;
