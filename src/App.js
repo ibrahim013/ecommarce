@@ -38,8 +38,8 @@ function App({setCurrentUser, currentUser}) {
       <Header/>
       <Switch>
         <Route exact path='/' component={HomePage}/>
-        <Route exact path='/shop' component={ShopCollection}/>
-        <Route exact path='/checkout' component={CheckoutPage}/>
+        <Route path='/shop' component={ShopCollection}/>
+        <Route path='/checkout' component={CheckoutPage}/>
         <Route exact path='/auth' render={() => currentUser ? (<Redirect to='/shop'/>) : (<AuthPage/>)}/>
       </Switch>
     </div>

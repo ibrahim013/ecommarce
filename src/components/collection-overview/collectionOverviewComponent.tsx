@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import CollectionPreview from '../../pages/collection-preview/collectionPreviewComponent';
 import { createStructuredSelector } from 'reselect';
-import { selectCollectionItems } from '../../redux/shop/shopDataSelector';
+import { selectCollectionForPreview } from '../../redux/shop/shopDataSelector';
 
 import './collectionOverviewStyle.scss';
 
@@ -11,11 +11,11 @@ interface Collection {
   id: number;
   title: string;
   routeName: string;
-  items: CollectionItem[]
+  items: CollectionItem[];
 }
 
 type  Props  = {
-  collections: Collection[]
+  collections: Collection[];
 }
 
 export interface CollectionItem {
@@ -34,6 +34,6 @@ const CollectionOverview: React.FC<Props> = ({ collections }) => (
 )
 
 const mapStateToProps = createStructuredSelector({
-  collections: selectCollectionItems
+  collections: selectCollectionForPreview
 });
 export default connect(mapStateToProps, null)(CollectionOverview);
