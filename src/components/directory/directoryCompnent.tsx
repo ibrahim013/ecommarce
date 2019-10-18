@@ -8,14 +8,20 @@ export interface DirectoryList {
   imageUrl: string;
   id: number;
   size?: string;
+  linkUrl: string;
 }
 
 const Directory =  () => {
   const [sectionItem] = useState<Array<DirectoryList>>([...section])
   return (
     <div className='directory-menu'>
-      {sectionItem.map(({id, imageUrl, title}) => (
-        <ItemListComponent key={`Index-${id}`} title={title} image={imageUrl}/>
+      {sectionItem.map(({id, imageUrl, title, linkUrl}) => (
+        <ItemListComponent 
+          key={`Index-${id}`} 
+          title={title} 
+          image={imageUrl} 
+          linkUrl={linkUrl}
+        />
       ))}
     </div>
   )
