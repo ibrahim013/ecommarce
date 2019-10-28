@@ -1,15 +1,12 @@
 import React from 'react';
-import DirectorList from '../../components/directory/directoryCompnent'
+import DirectorList from '../../components/directory/directoryComponent'
 
-//styles
-import './homePageStyle.scss';
-
-
+import { HomePageContainer } from './homepageStyle';
 
 const HomepageComponent = () => (
-  <div className='home-page-container'>
+  <HomePageContainer>
     <DirectorList/>
-  </div>
+  </HomePageContainer>
 )  
 
 export default HomepageComponent;
