@@ -1,15 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import './headerStyle.scss';
 
 import { auth } from '../../firebase/firebase.util';
 import CartIcon from '../../components/cart-icon/cartIconComponent';
 import CartDropdown from '../../components/cart-dropdown/cartDropdownComponent';
+
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/userSelector';
 import { selectCartHidden } from '../../redux/cart/cartSelector';
+
+import { 
+  HeaderContainer, 
+  LogoContainer, 
+  OptionContainerDiv, 
+  OptionContainerLink, 
+  OptionContainer 
+} from './headerStyle';
 
 interface Props {
   currentUser: any;
@@ -18,22 +24,22 @@ interface Props {
 
 const Header: React.FC<Props> = ({currentUser, hidden}) => {
   return(
-    <div className='header-wrapper'> 
-      <Link  className='logo-container' to='/'>
+    <HeaderContainer> 
+      <LogoContainer  to='/'>
         <h1>LOGO</h1>
-      </Link>
-      <div className='options'>
-        <Link  className='option' to='/shop'> SHOP </Link>
-        <Link  className='option' to='/contact'> CONTACT </Link>
+      </LogoContainer>
+      <OptionContainer>
+        <OptionContainerLink to='/shop'> SHOP </OptionContainerLink>
+        <OptionContainerLink to='/contact'> CONTACT </OptionContainerLink>
         { currentUser ? 
-          (<div  className='option' onClick = {() => auth.signOut()}> SIGN OUT </div>)
+          (<OptionContainerDiv onClick = {() => auth.signOut()}> SIGN OUT </OptionContainerDiv>)
           :
-          <Link  className='option' to='/auth'> SIGN IN </Link>
+          <OptionContainerLink to='/auth'> SIGN IN </OptionContainerLink>
         }
         <CartIcon/>
         { hidden ? null : <CartDropdown/> }
-      </div>
-    </div>
+      </OptionContainer>
+    </HeaderContainer>
   )
 }
 
