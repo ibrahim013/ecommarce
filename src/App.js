@@ -3,8 +3,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { auth, createUserProfileDocument } from './firebase/firebase.util';
 
-
-
 import AuthPage from './pages/authentication/authComponent';
 import HomePage from './pages/homePage/homepageComponent';
 import Header from './pages/header/headerComponent';
