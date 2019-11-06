@@ -22,9 +22,6 @@ const Collections: React.FC<any> = ({ match, updateCollections}) => {
       setIsLoading(false);
     })
 
-    return () => {
-  
-    };
   }, [updateCollections])
 
 return(

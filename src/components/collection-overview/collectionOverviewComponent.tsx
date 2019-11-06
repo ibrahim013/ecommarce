@@ -23,12 +23,13 @@ export interface CollectionItem {
   name: string;
   imageUrl: string;
   price: number;
+  routeName: string
 }
 
 const CollectionOverview: React.FC<Props> = ({ collections }) => (
   <div className='collection-overview'>
-      {collections.map(({id, title, items})=> {
-        return <CollectionPreview key={id} title={title} items={items}/>
+      {collections.map(({id, title, items, routeName})=> {
+        return <CollectionPreview key={id} title={title} items={items} linkUrl={`/shop/${routeName}`}/>
       })}
   </div>
 )

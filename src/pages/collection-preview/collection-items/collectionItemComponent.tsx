@@ -15,7 +15,7 @@ const CollectionItem: React.FC<any> = ({item, addItem}) => {
         <span className='name'>{name}</span>
         <span className='price'>{`₦ ${price}`}</span>
       </div>
-      <CustomBotton onClick={()=> { addItem(item) }}inverted>Add to Cart</CustomBotton>
+      <CustomBotton onClick={()=> { addItem(item) }}inverted className='custom'>Add to Cart</CustomBotton>
     </div>
   )
 }
