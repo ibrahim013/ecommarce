@@ -19,3 +19,7 @@ export const selectCollection = (collectionUrlParam: any) =>
     // @ts-ignore
     collections => collections ? collections[collectionUrlParam] : null
   )
+
+  export const selectIsFetchingCollection = createSelector([selectShopData],
+    shop => shop.isFetching  
+  )
