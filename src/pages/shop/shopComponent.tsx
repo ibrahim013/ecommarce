@@ -8,16 +8,21 @@ import CollectionDetailPage from '../collection-detail/collectionDetailComponent
 import withSpinner from '../../components/spinner/withSpinnerComponent';
 import { fetchShopCollectionAsync } from '../../redux/shop/shopActions';
 import { createStructuredSelector } from 'reselect';
-import { selectIsFetchingCollection } from '../../redux/shop/shopDataSelector';
+import { selectIsFetchingCollection, isFetchingCollectionCompleted } from '../../redux/shop/shopDataSelector';
 
 const CollectionOverViewWithSpinner = withSpinner(CollectionOverview);
 const CollectionDetailPageWithSpinner = withSpinner(CollectionDetailPage);
 
-const Collections: React.FC<any> = ({ match, fetchShopCollectionAsync, isCollectionFetching}) => {
+const Collections: React.FC<any> = ({ 
+  match, 
+  fetchShopCollectionAsync, 
+  isCollectionFetching, 
+  isFetchingCollectionCompleted
+}) => {
 
   useEffect(() => {
     fetchShopCollectionAsync();
-  },[fetchShopCollectionAsync])
+  }, [fetchShopCollectionAsync])
 
 return(
   <div className='shop-page'>
@@ -25,7 +30,7 @@ return(
       render={(props)=> <CollectionOverViewWithSpinner isLoading={isCollectionFetching} {...props}/>}
     />
     <Route path={`${match.path}/:collectionId`} 
-      render={(props)=> <CollectionDetailPageWithSpinner isLoading={isCollectionFetching} {...props}/>}
+      render={(props)=> <CollectionDetailPageWithSpinner isLoading={isFetchingCollectionCompleted} {...props}/>}
     />
   </div>
 )
@@ -34,7 +39,8 @@ return(
 
 
 const mapStateToProps = createStructuredSelector({
-  isCollectionFetching: selectIsFetchingCollection
+  isCollectionFetching: selectIsFetchingCollection,
+  isFetchingCollectionCompleted: isFetchingCollectionCompleted
 })
 
 const mapDispatchToProps = (dispatch: any) =>({

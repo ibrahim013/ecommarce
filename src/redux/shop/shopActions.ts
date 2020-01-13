@@ -15,10 +15,8 @@ export const fetchCollectionError = (msg: string) => ({
   payload: msg
 }) 
 
-export const fetchShopCollectionAsync = () => (dispatch: any)=>  {
-  console.log('=======out')
+export const fetchShopCollectionAsync = () => (dispatch: any) =>  {
     try {
-      console.log('=======in')
       dispatch(fetchCollectionStart())
       const collectionRef = fireStore.collection('collections');
       collectionRef.get().then(snapshot => {
